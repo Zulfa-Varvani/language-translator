@@ -1,4 +1,4 @@
-# language-translator
+# language-translator 👨‍💻
 A Python GUI that translates 20 words between English and another language
 
 Made using Python's tkinter
