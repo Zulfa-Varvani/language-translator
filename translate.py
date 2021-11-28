@@ -14,8 +14,8 @@ def extract_word(text):
 def toEng(win, word, d):
     if word in d:
         w = Label(win, text="Translated: "+d[word])
-        w.place(x=300,y=250)
+        w.place(x=150,y=100)
 def toLang(win,word, d):
     new = ''.join([k for k, v in d.items() if v == word])
     w = Label(win, text="Translated: "+new)
-    w.place(x=300,y=250)
+    w.place(x=150,y=100)
