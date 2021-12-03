@@ -9,3 +9,4 @@ Made using Python's tkinter
 * Use a better way to access the database of words (NumPy array?)
 * Efficiently update database of words
 * Make GUI look cleaner and presentable
+* When adding, it should open a input text boxes in the same GUI
