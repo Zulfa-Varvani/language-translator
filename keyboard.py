@@ -26,22 +26,16 @@ def HosoPop():
         if button == "SPACE" or button == "BACK" or "ENTER":
             tkinter.Button(kb,text= button,width=6, bg="#3c4987", fg="#ffffff",
                 activebackground = "#ffffff", activeforeground="#3c4987", relief='raised', padx=1,
-                pady=1, bd=1,command=command).grid(row=varRow,column=varColumn)
+                pady=1, bd=1,command=command).grid(row=varRow,column=varColumn)      
         else:
             tkinter.Button(kb,text= button,width=4, bg="#3c4987", fg="#ffffff",
                 activebackground = "#ffffff", activeforeground="#3c4987", relief='raised', padx=1,
                 pady=1, bd=1,command=command).grid(row=varRow,column=varColumn)
+        if button == "p" or button == "l" or button == "m":
+            varRow +=1
+            varColumn=0
         varColumn +=1
-
-        if varColumn > 14 and varRow == 2:
-            varColumn = 0
-            varRow+=1
-        if varColumn > 14 and varRow == 3:
-            varColumn = 0
-            varRow+=1
-        if varColumn > 14 and varRow == 4:
-            varColumn = 0
-            varRow+=1
+        
 
 def sub_val():
     global new_var
