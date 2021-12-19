@@ -3,7 +3,8 @@ import tkinter as tk
 from tkinter import *
 from translate import *
 from keyboard import *
-
+#helafdsfafah
+i = 0
 screen=Tk() #Creating a GUI window
 screen.geometry("600x400")
 screen.title("REC2021")
