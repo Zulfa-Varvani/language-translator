@@ -1,4 +1,5 @@
 import re
+import enchant
 import tkinter as tk
 from tkinter import *
 from db import *
@@ -20,7 +21,21 @@ def toLang(win,word, d):
     return new
 
 
-def wordisenglish(screen, new_var):
+
+def FindtypeWord(word):
+    if word in cree:
+        return "cree"
+    if word in ojibwe:
+        return "ojibwe"
+    if word in mont:
+        return "mont"
+    d=enchant.Dict("en_US")
+    if (d.check(word) == True):
+        return "english"
+    else:
+        return "Not a language"
+
+def wordisenglish(screen, new_var):  
     table_column_start =4
     table_row_start = 4
     table_columnspan = 2
@@ -51,47 +66,73 @@ def wordiscree(screen, new_var):
     table_columnspan = 2
     w = Label(screen, text=new_var)
     w.grid(row= 4,column= table_column_start+table_columnspan*2,columnspan= table_columnspan)
-    w_eng = toEng(screen,extract_word(new_var), cree)
-    if w_eng == "":
-        w_eng = Label(screen, text="None")
+    w_eng = str(toEng(screen,extract_word(new_var), cree))
+    w=w_eng
+    if w == '':
+        w = Label(screen, text="None")
     else:
-        w_eng = Label(screen, text=w_eng)
-    w_eng.grid(row= 4,column= table_column_start+table_columnspan*1,columnspan= table_columnspan)
-    w = toLang(screen,extract_word(str(w_eng)), ojibwe)
+        w = Label(screen, text=w)
+    w.grid(row= 4,column= table_column_start+table_columnspan*1,columnspan= table_columnspan)
+    w = toLang(screen,extract_word(w_eng), ojibwe)
     if w == "":
         w = Label(screen, text="None")
     else:
         w = Label(screen, text=w)
     w.grid(row= 4,column= table_column_start+table_columnspan*3,columnspan= table_columnspan)
 
-    w = toLang(screen,extract_word(str(w_eng)), mont)
+    w = toLang(screen,extract_word(w_eng), mont)
     if w == "":
         w = Label(screen, text="None")
     else:
         w = Label(screen, text=w)
     w.grid(row= 4,column= table_column_start+table_columnspan*4,columnspan= table_columnspan)
 
-def wordisobj(screen, new_var):
+def wordisojibwe(screen, new_var):
     table_column_start =4
     table_columnspan = 2
     w = Label(screen, text=new_var)
-    w.grid(row= 4,column= table_column_start+table_columnspan*2,columnspan= table_columnspan)
-    w_eng = toEng(screen,extract_word(new_var), cree)
-    if w_eng == "":
-        w_eng = Label(screen, text="None")
+    w.grid(row= 4,column= table_column_start+table_columnspan*3,columnspan= table_columnspan)
+    w_eng = str(toEng(screen,extract_word(new_var), ojibwe))
+    w=w_eng
+    if w == '':
+        w = Label(screen, text="None")
     else:
-        w_eng = Label(screen, text=w_eng)
-    w_eng.grid(row= 4,column= table_column_start+table_columnspan*1,columnspan= table_columnspan)
-    w = toLang(screen,extract_word(str(w_eng)), ojibwe)
+        w = Label(screen, text=w)
+    w.grid(row= 4,column= table_column_start+table_columnspan*1,columnspan= table_columnspan)
+    w = toLang(screen,extract_word(w_eng), cree)
     if w == "":
         w = Label(screen, text="None")
     else:
         w = Label(screen, text=w)
-    w.grid(row= 4,column= table_column_start+table_columnspan*3,columnspan= table_columnspan)
-
-    w = toLang(screen,extract_word(str(w_eng)), mont)
+    w.grid(row= 4,column= table_column_start+table_columnspan*2,columnspan= table_columnspan)
+    w = toLang(screen,extract_word(w_eng), mont)
     if w == "":
         w = Label(screen, text="None")
     else:
         w = Label(screen, text=w)
     w.grid(row= 4,column= table_column_start+table_columnspan*4,columnspan= table_columnspan)
+
+def wordismont(screen, new_var):
+    table_column_start =4
+    table_columnspan = 2
+    w = Label(screen, text=new_var)
+    w.grid(row= 4,column= table_column_start+table_columnspan*4,columnspan= table_columnspan)
+    w_eng = str(toEng(screen,extract_word(new_var), mont))
+    w=w_eng
+    if w == '':
+        w = Label(screen, text="None")
+    else:
+        w = Label(screen, text=w)
+    w.grid(row= 4,column= table_column_start+table_columnspan*1,columnspan= table_columnspan)
+    w = toLang(screen,extract_word(w_eng), cree)
+    if w == "":
+        w = Label(screen, text="None")
+    else:
+        w = Label(screen, text=w)
+    w.grid(row= 4,column= table_column_start+table_columnspan*2,columnspan= table_columnspan)
+    w = toLang(screen,extract_word(w_eng), ojibwe)
+    if w == "":
+        w = Label(screen, text="None")
+    else:
+        w = Label(screen, text=w)
+    w.grid(row= 4,column= table_column_start+table_columnspan*3,columnspan= table_columnspan)

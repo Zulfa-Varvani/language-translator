@@ -7,7 +7,7 @@ from keyboard_test import *
 screen=Tk() #Creating a GUI window
 screen.geometry("600x400")
 screen.title("REC2021")
-#hello
+
 def engToCree():
     w = Label(screen, text="Word: "+new_var)
     w.place(x=150,y=70) 

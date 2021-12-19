@@ -54,18 +54,31 @@ def HosoPop():
         keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2) 
         varColumn +=2
 
+def clear_widget_text():
+    Label(screen, text="\t\t\t\t\t\t\t\t").grid(row=4, column=2, columnspan= 30)
+
 def sub_val():
     global new_var
     new_var = entry.get()
     #new_var = StringVar(value = entry.get())
     # screen.destroy()
-    wordisenglish(screen, new_var)
+    clear_widget_text()
+    type = FindtypeWord(new_var)
+    if type =="cree":
+        wordiscree(screen, new_var)
+    if type =="ojibwe":
+        wordisojibwe(screen, new_var)
+    if type =="mont":
+        wordismont(screen, new_var)
+    if type == "english":
+        wordisenglish(screen,new_var)
+    if type == "Not a language":
+        Label(screen, text=" WARNING: " +str(type)).grid(row=4, column=2, columnspan= 30)
 
 def PressKeyboard_Enter(event):
     sub_val()
 
 #DEFINE main ======================================================================
-
 
 
 def addWordWindow():

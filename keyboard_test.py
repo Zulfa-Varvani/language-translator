@@ -31,22 +31,22 @@ def HosoPop():
 
     #Place button on grid system
     for count in range (0, 10):
-        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2) 
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W )
         varColumn +=2
     varRow +=1
     varColumn =1
     for count in range (10, 19):
-        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2) 
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W  ) 
         varColumn +=2
     varRow +=1
     varColumn =2
     for count in range (19, 26):
-        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2) 
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W ) 
         varColumn +=2
     varRow +=1
     varColumn =3
     for count in range (26, len(buttons)):
-        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2) 
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W ) 
         varColumn +=2
 
 def sub_val():
