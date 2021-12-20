@@ -1,8 +1,7 @@
-from db import *
 import tkinter as tk
 from tkinter import *
-from translate import *
 import tkinter
+import pandas as pd
 
 screen = tkinter.Tk()
 buttons = [
@@ -12,6 +11,7 @@ buttons = [
 'n','m','ê','é', 'â' ,'û' ,'BACK','SPACE'
 ]
 
+db = pd.read_csv('database.csv',encoding='latin-1')
 
 #DEFINE KEYBoard ==================================================================================
 def select(value):
@@ -21,8 +21,7 @@ def select(value):
         entry.insert(tkinter.END, ' ')
     else :
         entry.insert(tkinter.END,value)
-
-    
+   
 def HosoPop():
     varRow = 30
     varColumn = 0
@@ -57,54 +56,21 @@ def clear_widget_text():
     Label(screen, text="\t\t\t\t\t\t\t\t").grid(row=4, column=2, columnspan= 30)
 
 def sub_val():
-    global new_var
-    new_var = entry.get()
+    word = entry.get()
     #new_var = StringVar(value = entry.get())
     # screen.destroy()
     clear_widget_text()
-    type = FindtypeWord(new_var)
-    if type =="cree":
-        wordiscree(screen, new_var)
-    if type =="ojibwe":
-        wordisojibwe(screen, new_var)
-    if type =="mont":
-        wordismont(screen, new_var)
-    if type == "english":
-        wordisenglish(screen,new_var)
-    if type == "Not a language":
-        Label(screen, text=" WARNING: " +str(type)).grid(row=4, column=2, columnspan= 30)
+    english = db[db.isin([word]).any(axis=1)]['English'].iloc[0]
+    cree = db[db.isin([word]).any(axis=1)]['Cree'].iloc[0]
+    ojib = db[db.isin([word]).any(axis=1)]['Ojibwe'].iloc[0]
+    mont = db[db.isin([word]).any(axis=1)]['Montagnais'].iloc[0]
+    e = Label(screen, text=english).grid(row=4, column=4+2*1, columnspan=2)
+    c = Label(screen, text=cree).grid(row=4, column=4+2*2, columnspan=2)
+    o = Label(screen, text=ojib).grid(row=4, column=4+2*3, columnspan=2)
+    m = Label(screen, text=mont).grid(row=4, column=4+2*4, columnspan=2)
 
 def PressKeyboard_Enter(event):
     sub_val()
-
-#DEFINE main ======================================================================
-
-
-def addWordWindow():
-    addWordWindow=Toplevel(screen)
-    addWordWindow.title("Add new word")
-    addWordWindow.geometry("600x400")
-    heading=Label(addWordWindow,text="Add new word").place(x=250, y=20)
-    headingEnglish=Label(addWordWindow, text="English").place(x=150, y=75)
-    eEnglish=Entry(addWordWindow, width=25)
-    eEnglish.place(x=200, y=75)
-    englishWord=eEnglish.get()#Takes the english input, puts into variable
-    headingIndigenous =Label(addWordWindow, text="Indigenous Language").place(x=75, y=100)
-    eIndigenous =Entry(addWordWindow, width=25)
-    eIndigenous.place(x=200, y=100)
-    indigenousWord=eIndigenous.get()#input -> variable
-    def addEnglishToCree():
-        cree['indigenousWord']='englishWord'
-        print("Updated!")
-    def addEnglishtoOjibway():
-        ojibwe[indigenousWord]=englishWord
-    def addEnglishtoMontagnais():
-        mont[indigenousWord]=englishWord
-    englishToCree=Button(addWordWindow, text="English & Cree", height=2, width=20, command=addEnglishToCree).place(x=200, y=170)
-    englishToOjibway=Button(addWordWindow, text="English & Ojibway", height=2, width=20, command=addEnglishtoOjibway).place(x=200, y=235)
-    englishToMontagnais=Button(addWordWindow, text="English & Montagnais", height=2, width=20, command=addEnglishtoMontagnais).place(x=200, y=300)
-
-
 
 # KEYBOARD==================================================================================
 row_= 29
@@ -126,11 +92,6 @@ heading=Label(screen, text="Indigenous Language Translator").grid(row=_row_main,
 heading=Label(screen, text="========================================= ").grid(row=_row_main+1, column=2, columnspan= 30)
 heading=Label(screen, text="English        Cree       Ojibway       Montagnais   ").grid(row=_row_main+2, column=2, columnspan= 30)
 heading=Label(screen, text="========================================= ").grid(row=_row_main+3, column=2, columnspan= 30)
-
-
-#take the word find if it is which language 
-#exctract(new_var)
-
 
 #do the translation
 screen.mainloop()
