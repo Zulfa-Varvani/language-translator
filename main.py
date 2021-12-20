@@ -1,7 +1,7 @@
 from db import *
 import tkinter as tk
 from tkinter import *
-from translate_copy import *
+from translate import *
 import tkinter
 
 screen = tkinter.Tk()
