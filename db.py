@@ -1,65 +1,16 @@
-cree = {
-    "tanisi": "hello",
-    "Nipiy": "water",
-    "Iskwew": "woman",
-    "Wâpakwanîs": "flower",
-    "Wâsênikan": "window",
-    "Picikwâs": "apple",
-    "Osâwâs": "orange",
-    "Mistatim": "horse",
-    "Akihtâson": "number",
-    "Minihkwewin" : "drink",
-    "Nakata" : "leave" ,
-    "Askihtak" : "green" ,
-    "Osâwêkin" : "yellow",
-    "ka peyakoskânowihk" : "tribe",
-    "Kihcikamiy" : "ocean",
-    "waciy" : "mountain",
-    "Maskosiy" : "grass",
-    "Sîpîy" : "river",
-    "Ayisiyinowak" : "people"
-}
-ojibwe = {
-    "Boozhoo" : "Welcome",
-    "Moozhawgan": "Scissors",
-    "Nizhawsi": "Seven",
-    "Migizi": "Eagle", 
-    "Nigig": "Otter",
-    "Nibi": "Water", 
-    "Aki": "Earth",
-    "Wabigon": "Flower",
-    "Makade": "Black",
-    "Ikwe": "Woman",
-    "Kitigan": "Plant",
-    "Ozaawi": "Yellow",
-    "Maajaa": "Leave",
-    "Animosh": "Tobacco",
-    "Migwech": "Thank you",
-    "niswi": "Three",
-    "Ajitamo": "Squirrel", 
-    "Waboos": "Rabbit",
-    "Oninj": "Finger", 
-    "Waabishki": "White"
-}
-mont = {
-    "Nishtu" : "three",
-    "atshimipuk" : " snake",
-    "Ishkueu" : "woman",
-    "mush" : "moose",
-    "uâpush" : "rabbit",
-    "Uapau " : "white" ,
-    "Uishauau" : "yellow" ,
-    "misinak" : "turtles",
-    "Kashteuau" : "black" ,
-    "nishpishkun" :" shoulder",
-    "Pûshit" : "leave" ,
-    "kapelikushkueu " : "horse" , 
-    "ninuai" : " cheek",
-    "uasheshkunau" : "green" ,
-    "apikushish": " mouse",
-    "atiku" : "caribou",
-    "nukutshash" : "squirrel" ,
-    "kâku" : "porcupine",
-    "nininitshititshan" : " finger",
-    "nishuasht" : " seven"
-}
+import pandas as pd
+
+db = pd.read_csv('database.csv',encoding='latin-1')
+
+word = input("Enter a word: ")
+
+print(db[db.isin([word]).any(axis=1)])
+
+english = db[db.isin([word]).any(axis=1)]['English'].iloc[0]
+cree = db[db.isin([word]).any(axis=1)]['Cree'].iloc[0]
+ojib = db[db.isin([word]).any(axis=1)]['Ojibwe'].iloc[0]
+mont = db[db.isin([word]).any(axis=1)]['Montagnais'].iloc[0]
+
+print(english, cree, ojib, mont)
+
+# update main python file to read from csv and get values - may not need translate.py

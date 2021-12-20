@@ -18,30 +18,36 @@ def select(value):
     else :
         entry.insert(tkinter.END,value)
 
+    
 def HosoPop():
-    varRow = 2
+    varRow = 3
     varColumn = 0
-    for button in buttons:
-        command = lambda x=button: select(x)
-        if button == "SPACE" or button == "BACK" or "ENTER":
-            tkinter.Button(kb,text= button,width=6, bg="#3c4987", fg="#ffffff",
-                activebackground = "#ffffff", activeforeground="#3c4987", relief='raised', padx=1,
-                pady=1, bd=1,command=command).grid(row=varRow,column=varColumn)
-        else:
-            tkinter.Button(kb,text= button,width=4, bg="#3c4987", fg="#ffffff",
-                activebackground = "#ffffff", activeforeground="#3c4987", relief='raised', padx=1,
-                pady=1, bd=1,command=command).grid(row=varRow,column=varColumn)
-        varColumn +=1
+    keyboard_letter = []
+    #Create button 
+    for count in range (0, len(buttons)):
+        command = lambda x=buttons[count]: select(x)
+        button_insert= tkinter.Button(kb,text= buttons[count],width=6, bg="#3c4987", fg="#ffffff", activebackground = "#ffffff", activeforeground="#3c4987", relief='raised', padx=1, pady=1, bd=1,command=command)
+        keyboard_letter.append(button_insert) 
 
-        if varColumn > 14 and varRow == 2:
-            varColumn = 0
-            varRow+=1
-        if varColumn > 14 and varRow == 3:
-            varColumn = 0
-            varRow+=1
-        if varColumn > 14 and varRow == 4:
-            varColumn = 0
-            varRow+=1
+    #Place button on grid system
+    for count in range (0, 10):
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W )
+        varColumn +=2
+    varRow +=1
+    varColumn =1
+    for count in range (10, 19):
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W  ) 
+        varColumn +=2
+    varRow +=1
+    varColumn =2
+    for count in range (19, 26):
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W ) 
+        varColumn +=2
+    varRow +=1
+    varColumn =3
+    for count in range (26, len(buttons)):
+        keyboard_letter[count].grid(row=varRow,column=varColumn, columnspan= 2, sticky= W ) 
+        varColumn +=2
 
 def sub_val():
     global new_var
@@ -49,15 +55,19 @@ def sub_val():
     #new_var = StringVar(value = entry.get())
     kb.destroy()
 
+def PressKeyboard_Enter(event):
+    sub_val()
+
 kb.title("keyboard")
-kb.resizable(0,0)
+#kb.resizable(0,0)
 query = StringVar()
-button1 = Button(kb,text='Enter!', command=sub_val).grid(row=0,columnspan=15)
+button1 = Button(kb,text='Enter!', command=sub_val).grid(row=1,column=14, columnspan= 2)
+
+kb.bind("<Return>", PressKeyboard_Enter)
+HosoPop()
 
 entry = Entry(kb,width=50)
-entry.grid(row=1,columnspan=15)
+entry.grid(row=1,columnspan=15,pady=20)
 # entry.pack()
-
-entry.bind("<Button-1>", lambda e: HosoPop())
 
 kb.mainloop()
