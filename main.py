@@ -2,7 +2,7 @@ from db import *
 import tkinter as tk
 from tkinter import *
 from translate import *
-from keyboard import *
+from keyboard_test import *
 
 screen=Tk() #Creating a GUI window
 screen.geometry("600x400")
@@ -10,7 +10,7 @@ screen.title("REC2021")
 
 def engToCree():
     w = Label(screen, text="Word: "+new_var)
-    w.place(x=150,y=70)
+    w.place(x=150,y=70) 
     toLang(screen,extract_word(new_var), cree)
 def creeToEng():
     w = Label(screen, text="Word: "+new_var)
@@ -56,6 +56,8 @@ def addWordWindow():
     englishToCree=Button(addWordWindow, text="English & Cree", height=2, width=20, command=addEnglishToCree).place(x=200, y=170)
     englishToOjibway=Button(addWordWindow, text="English & Ojibway", height=2, width=20, command=addEnglishtoOjibway).place(x=200, y=235)
     englishToMontagnais=Button(addWordWindow, text="English & Montagnais", height=2, width=20, command=addEnglishtoMontagnais).place(x=200, y=300)
+
+
 
 heading=Label(screen, text="Indigenous Language Translator").place(x=200, y=10)
     
