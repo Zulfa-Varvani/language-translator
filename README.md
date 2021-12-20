@@ -6,7 +6,12 @@ Made using Python's tkinter
 #### To-Do:
 * Merge frames to one (get input, display buttons, and display output in one frame)
     * For now, input is in a separate window from displaying outputs and buttons 
-* Use a better way to access the database of words (NumPy array?)
+* Use a better way to access the database of words
 * Efficiently update database of words
 * Make GUI look cleaner and presentable
-* When adding, it should open a input text boxes in the same GUI
+* When adding a word, it should open a input text boxes in the same GUI (maybe...?)
+
+
+####Branches
+ * Mat doing the GUI cleanup and merges
+ * Zulfa doing the database and the niceness of the GUI because she's lazy :D
