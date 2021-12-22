@@ -4,16 +4,14 @@ import tkinter
 import pandas as pd
 
 screen = tkinter.Tk()
-buttons = [
-'q','w', 'e', 'r', 't', 'y', 'u','i', 
+buttons = ['q','w', 'e', 'r', 't', 'y', 'u','i', 
 'o', 'p', 'a', 's', 'd', 'f', 'g','h',
 'j', 'k' , 'l', 'z', 'x', 'c','v','b',
-'n','m','ê','é', 'â' ,'û' ,'BACK','SPACE'
-]
+'n','m','ê','é', 'â' ,'û' ,'BACK','SPACE']
 
 db = pd.read_csv('database.csv',encoding='latin-1')
 
-#DEFINE KEYBoard ==================================================================================
+#DEFINE KEYBoard
 def select(value):
     if value == "BACK":
         entry.delete(len(entry.get())-1,tkinter.END)
@@ -57,8 +55,6 @@ def clear_widget_text():
 
 def sub_val():
     word = entry.get()
-    #new_var = StringVar(value = entry.get())
-    # screen.destroy()
     clear_widget_text()
     english = db[db.isin([word]).any(axis=1)]['English'].iloc[0]
     cree = db[db.isin([word]).any(axis=1)]['Cree'].iloc[0]
@@ -72,26 +68,26 @@ def sub_val():
 def PressKeyboard_Enter(event):
     sub_val()
 
-# KEYBOARD==================================================================================
+# KEYBOARD
 row_= 29
-screen.title("keyboard")
-#kb.resizable(0,0)
+screen.title("Language Translator")
 query = StringVar()
-button1 = Button(screen,text='Enter!', command=sub_val).grid(row=row_,column=14, columnspan= 2)
+button1 = Button(screen,text='Translate!', command=sub_val).grid(row=row_,column=14, columnspan= 2)
 
 screen.bind("<Return>", PressKeyboard_Enter)
 HosoPop()
 
-entry = Entry(screen,width=50)
-entry.grid(row=row_,columnspan=15,pady=20)
-# entry.pack()
-
-# MAIN ===============================================================
+# MAIN
 _row_main=0
 heading=Label(screen, text="Indigenous Language Translator").grid(row=_row_main, column=2, columnspan= 30)
 heading=Label(screen, text="========================================= ").grid(row=_row_main+1, column=2, columnspan= 30)
-heading=Label(screen, text="English        Cree       Ojibway       Montagnais   ").grid(row=_row_main+2, column=2, columnspan= 30)
+heading=Label(screen, text="English\tCree\tOjibway\t  Montagnais").grid(row=_row_main+2, column=2, columnspan= 30)
 heading=Label(screen, text="========================================= ").grid(row=_row_main+3, column=2, columnspan= 30)
+
+entry = Entry(screen,width=50)
+entry.grid(row=row_,columnspan=15,pady=20)
+
+#add words
 
 #do the translation
 screen.mainloop()
